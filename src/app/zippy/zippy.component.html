@@ -1,0 +1,19 @@
+<div class="card">
+    <h5 class="card-header"
+        [class.expanded]="isExpanded"
+        (click)="toggle()"
+        >
+        {{ title }}
+        <i class="fas"
+            [ngClass]="{
+                'fa-chevron-up':isExpanded,
+                'fa-chevron-down': !isExpanded
+            }"
+        ></i>
+    </h5>
+    <div *ngIf="isExpanded" class="card-body">
+        <p class="card-text">
+            <ng-content></ng-content>
+        </p>
+    </div>
+</div>

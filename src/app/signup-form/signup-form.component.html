@@ -1,0 +1,37 @@
+<form [formGroup]="form" (ngSubmit)="login()">
+    <div class="alert alert-danger" *ngIf="form.errors">
+        The username or password is invalid
+    </div>
+
+    <div formGroupName="account">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input 
+                formControlName="username"
+                id="username" 
+                type="text" 
+                class="form-control">
+                <div *ngIf="username.pending">Checking for uniqueness...</div>
+                <!-- para usar esta validacion mas ordenada (no como el del password) desde component.ts se agrega una propiedad para acceder a la propiedad username dentro de form (como un metodo) -->
+            <div *ngIf="username.touched && username.invalid" class="alert alert-danger">
+                <div *ngIf="username.errors.required">Username is required</div>
+                <div *ngIf="username.errors.minlength">Username should be minimun {{ username.errors.minlength.requiredLength}} characters</div>
+                <div *ngIf="username.errors.cannotContainSpace">Username cannot contain space</div>
+                <!-- la ultima validacion demora un poco por el setTimeOut de la condicion de validacion -->
+                <div *ngIf="username.errors.shouldBeUnique">Username should be unique</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input 
+                formControlName="password"
+                id="password" 
+                type="text" 
+                class="form-control">
+            <div *ngIf="form.get('account.password').touched && form.get('account.password').invalid" class="alert alert-danger">Password is required</div>
+            <!-- <div *ngIf="form.get('password').touched && form.get('password').invalid" class="alert alert-danger">Password is required</div> -->
+            
+        </div>
+    </div>
+    <button class="btn btn-primary" type="submit">Sign Up</button>
+</form>

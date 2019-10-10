@@ -1,0 +1,14 @@
+<!-- [class.bg-primary] = "isSelected"
+[class.bg-danger] = "!isSelected" -->
+<span 
+class=""
+[ngClass]="{
+  'bg-primary':isSelected,
+  'bg-danger':!isSelected
+}"
+(click) = "onClick()"
+>A</span>
+
+  <!-- <input type="text" [(ngModel)]="title">
+  <br> -->
+  <!-- {{ title | titleCase}} -->
